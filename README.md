@@ -6,13 +6,13 @@ Making connections is a core fundamental of LinkedIn(500+ is recommended). With 
 and more connections means more people Will be exposed to your posts, and you will be more often comes up in the search results.
 
 ## Features
-* Add as much connections as as you want throgh the "network page" - it will add connections based on the LinkedIn suggestions algoritm.
+* Add as much connections as as you want through the "network page" - it will add connections based on the LinkedIn suggestions algoritm.
 
-* coming soon! - add connections based on keywords given by the user.
+* Coming soon! - add connections based on keywords given by the user.
 
 ## Instructions
 
-in the credentials.py edit according your login credentials
+In the credentials.py edit according to your login credentials
 ```
 def get_credentials():
     email = ""
