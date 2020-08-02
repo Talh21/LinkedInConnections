@@ -1,11 +1,4 @@
-from credentials import *
-from validation import *
-from selenium import webdriver
-import time
-from urllib.request import *
-from urllib.error import *
-import os
-import sys
+from utilities import *
 
 
 def intro():
@@ -28,31 +21,37 @@ def intro():
 Please notice: after the browser has been launched come back and follow the instructions. 
 ---------------------------------------------------------------------------------------------------
 """)
-    time.sleep(1)
+    time.sleep(1.5)
 
 
-def check_internet_connection():
-    try:
-        urlopen('http://216.58.192.142', timeout=10)
-        try:
-            urlopen("https://www.linkedin.com/home", timeout=2)
-            return True
-        except URLError:
-            print("[-] LinkedIn might be offline...")
-            return False
-    except URLError:
-        print("[-] No internet connection...")
-        return False
+def user_prompt_for_choosing_mode():
+    auto_or_search = input("""\nDo you want to use auto-pilot version or search by specific keyword?
+1) Auto-pilot
+2) Search by keyword
+Choice: """)
+
+    while is_choice_is_valid(auto_or_search) is False:
+        auto_or_search = input("""Not a valid option. Please Try again.\n
+1) Auto-pilot
+2) Search by keyword
+Choice: """)
+
+    return auto_or_search
 
 
-def get_option():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-n", "--number", dest="number", type=check_if_positive,
-                        help="Specify the number of connections you want to send a request to.")
-    options = parser.parse_args()
-    if not options.number:
-        parser.error('[-] You must enter a valid number. \n[*] Type "-h/--help" for more info')
-    return options
+def get_the_number_of_connections_and_keyword():
+    key_word = input("\nPlease choose the keyword: ")
+    number_of_requests = input("Please enter the number of connections you want to send a request to: ")
+    while check_if_isdigit(number_of_requests) is False:
+        number_of_requests = input("\nNot a valid number. Try again: ")
+    return key_word, number_of_requests
+
+
+def get_num_of_connections_auto():
+    number_of_requests = input("\nPlease enter the number of connections you want to send a request to: ")
+    while check_if_isdigit(number_of_requests) is False:
+        number_of_requests = input("\nNot a valid number. Try again: ")
+    return number_of_requests
 
 
 def get_linkedin():
@@ -73,32 +72,32 @@ def login():
         pass
 
 
-def two_factor_auth():
+def network_send_requests(number_of_connections):
+    time.sleep(2)
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((
+        By.XPATH, Xpath.MINIMIZE_MESSAGES))).click()
+    driver.get('https://www.linkedin.com/mynetwork/')
+    counter = 0
     try:
-        two_factor = input("If you you have 2FA please enter the verification code."
-                   "\nWhen you are in LinkedIn Homepage press Enter to continue: ")
-        while two_factor != "":
-            two_factor = input("Please press Enter")
+        for connection in range(counter, int(number_of_connections)):
+            WebDriverWait(driver, 5).until(EC.presence_of_element_located((
+                By.XPATH, Xpath.CONNECT_NETWORK_UP_PAGE))).click()
+            counter += 1
+            print(f"\r[+] Sent a connection request => #{counter}", end='', flush=True)
+            time.sleep(2)
     except:
         pass
 
-
-def network_send_requests(number_of_connections):
-    time.sleep(2)
-    driver.find_element_by_xpath('//header[@data-control-name="overlay.minimize_connection_list_bar"]').click()
-    driver.get('https://www.linkedin.com/mynetwork/')
-    x_path = '//button[@data-control-name="invite"]'
-    counter = 0
     while counter < int(number_of_connections):
         driver.execute_script('window.scrollTo(0,(window.pageYOffset+300))')
         time.sleep(4)
         try:
-            for button in range(counter, int(number_of_connections)):
-                button = driver.find_element_by_xpath(x_path)
-                button.click()
+            for connection in range(counter, int(number_of_connections)):
+                WebDriverWait(driver, 5).until(EC.presence_of_element_located((
+                    By.XPATH, Xpath.INVITE_CONNECTIONS_NETWORK_PAGE))).click()
                 counter += 1
                 print(f"\r[+] Sent a connection request => #{counter}", end='', flush=True)
-                time.sleep(1)
+                time.sleep(2)
         except:
             pass
 
@@ -106,20 +105,71 @@ def network_send_requests(number_of_connections):
     print("\nProcess done!")
 
 
+def search_connections_by_keywords(key_word):
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((
+        By.XPATH, Xpath.MINIMIZE_MESSAGES))).click()
+    search_box = WebDriverWait(driver, 10).until(EC.presence_of_element_located(
+        (By.XPATH, Xpath.SEARCH_BOX)))
+    search_box.send_keys(key_word, Keys.ENTER)
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located(
+        (By.XPATH, Xpath.VIEW_ONLY_PEOPLE)))
+
+
+def sent_request_by_keyword(number_of_connections):
+    counter = 0
+    while counter < int(number_of_connections):
+        try:
+            for button in range(counter, int(number_of_connections)):
+                WebDriverWait(driver, 2).until(EC.presence_of_element_located(
+                    (By.XPATH, Xpath.CONNECT_BUTTON_SEARCH_PAGE))).click()
+                WebDriverWait(driver, 2).until(EC.presence_of_element_located(
+                    (By.XPATH, Xpath.CONFIRM_CONNECTION))).click()
+                counter += 1
+                print(f"\r[+] Sent a connection request => #{counter}", end='', flush=True)
+                time.sleep(1)
+        except:
+            pass
+
+        driver.execute_script('window.scrollTo(0,(window.pageYOffset+300))')
+        time.sleep(4)
+        try:
+            driver.find_element_by_xpath(Xpath.NEXT_PAGE).click()
+            time.sleep(1)
+        except:
+            pass
+
+    driver.quit()
+    print("\nProcess done!")
+
+
+def main():
+    get_linkedin()
+    login()
+    two_factor_auth()
+
+
 if __name__ == '__main__':
     try:
-        number_of_connections_to_add = get_option()
         intro()
+        mode = user_prompt_for_choosing_mode()
         if check_internet_connection():
             try:
-                chrome_path = "C:\Program Files\chromedriver.exe"
-                driver = webdriver.Chrome(executable_path=chrome_path)
-                get_linkedin()
-                login()
-                two_factor_auth()
-                network_send_requests(number_of_connections_to_add.number)
+                if mode == "2":
+                    keyword, number = get_the_number_of_connections_and_keyword()
+                    chrome_path = "C:\Program Files\chromedriver.exe"
+                    driver = webdriver.Chrome(executable_path=chrome_path)
+                    main()
+                    search_connections_by_keywords(keyword)
+                    sent_request_by_keyword(number)
+                else:
+                    number = get_num_of_connections_auto()
+                    chrome_path = "C:\Program Files\chromedriver.exe"
+                    driver = webdriver.Chrome(executable_path=chrome_path)
+                    main()
+                    network_send_requests(number)
             except:
                 print("\n[-] Quitting...")
     except:
         print("\n[-] Quitting...")
         sys.exit()
+
