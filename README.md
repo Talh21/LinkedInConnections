@@ -10,14 +10,23 @@ and more connections means more people Will be exposed to your posts, and you wi
 
 2. **Search by keyword :mag_right:** - add connections based on keywords given by the user.
 
-## Instructions
+## Instructions & Requirements
 
-In the credentials.py edit according to your login credentials
+1. Make sure you installed [WebDriver](https://chromedriver.chromium.org/downloads)
+ >Note: Set ChromeDriver path. Change the path according to your ChromeDrive.exe installation path.
+  ``` 
+CHROME_PATH = ''
+  ```
+
+2. In the credentials.py edit according to your login credentials
 ```
     email = ""
     password = ""
 ```
 >Note: Please fill in your credentials between the quotation mark
+
+3. - [selenium](https://pypi.org/project/selenium/)
+   - [urllib3](https://pypi.org/project/urllib3/)
 
 ## Installation
 
