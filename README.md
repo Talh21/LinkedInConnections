@@ -19,11 +19,12 @@ CHROME_PATH = ''
   ```
 
 2. In the credentials.py edit according to your login credentials
+>Note: Please fill in your credentials between the quotation mark
+
 ```
     email = ""
     password = ""
 ```
->Note: Please fill in your credentials between the quotation mark
 
 3. - [selenium](https://pypi.org/project/selenium/)
    - [urllib3](https://pypi.org/project/urllib3/)
