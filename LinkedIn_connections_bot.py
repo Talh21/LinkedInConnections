@@ -1,4 +1,5 @@
 from utilities import *
+from validation import *
 
 
 def intro():
@@ -61,7 +62,6 @@ def get_linkedin():
 
 
 def login():
-    email, password = get_credentials()
     try:
         driver.find_element_by_id("username").send_keys(email)
         time.sleep(1)
