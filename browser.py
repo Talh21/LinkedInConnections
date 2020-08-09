@@ -1,9 +1,11 @@
 from utilities import *
 
+CHROME_PATH = "C:\Program Files\chromedriver.exe"
+
 
 class Browser:
     def __init__(self):
-        self.path = "C:\Program Files\chromedriver.exe"
+        self.path = CHROME_PATH
         self.driver = None
 
     def open_browser(self):
