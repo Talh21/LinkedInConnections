@@ -1,36 +1,14 @@
 from utilities import *
 from validation import *
+from browser import Browser
 
-print(type("f"))
 
-
-class LinkedIn:
+class LinkedInAdd(Browser):
     def __init__(self):
-        self.path = "C:\Program Files\chromedriver.exe"
+        super().__init__()
         self.mode = ""
         self.keyword = ""
         self.num = ""
-        self.driver = None
-
-    def open_browser(self):
-        self.driver = webdriver.Chrome(self.path)
-        self.driver.maximize_window()
-
-    def get_linkedin(self):
-        self.open_browser()
-        self.driver.get("https://www.linkedin.com/login?fromSignIn=true&trk=guest_homepage-basic_nav-header-signin")
-        time.sleep(1)
-
-    def login_linkedin(self):
-        self.get_linkedin()
-        try:
-            self.driver.find_element_by_id("username").send_keys(email)
-            time.sleep(1)
-            self.driver.find_element_by_id("password").send_keys(password)
-            time.sleep(1)
-            self.driver.find_element_by_xpath('//button[@class="btn__primary--large from__button--floating"]').click()
-        except:
-            pass
 
     def user_prompt_for_choosing_mode(self):
         self.mode = input("""\nDo you want to use auto-pilot version or search by specific keyword?
@@ -149,5 +127,5 @@ Choice: """)
 
 
 if __name__ == '__main__':
-    LinkedInBot = LinkedIn()
-    LinkedInBot.main()
+    linkedin_bot = LinkedInAdd()
+    linkedin_bot.main()
