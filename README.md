@@ -12,7 +12,7 @@ and more connections means more people Will be exposed to your posts, and you wi
 
 ## Instructions & Requirements
 
-1. Make sure you installed [WebDriver](https://chromedriver.chromium.org/downloads)
+1. Make sure you install [WebDriver](https://chromedriver.chromium.org/downloads)
  >Note: Set ChromeDriver path. Change the path according to your ChromeDrive.exe installation path.
  
  
