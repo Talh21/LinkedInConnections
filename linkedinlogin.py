@@ -3,7 +3,7 @@ from utilities import *
 CHROME_PATH = "C:\Program Files\chromedriver.exe"
 
 
-class Browser:
+class LinkedInLogin:
     def __init__(self):
         self.path = CHROME_PATH
         self.driver = None
@@ -25,5 +25,7 @@ class Browser:
             self.driver.find_element_by_id("password").send_keys(password)
             time.sleep(1)
             self.driver.find_element_by_xpath('//button[@class="btn__primary--large from__button--floating"]').click()
+            WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((
+                By.XPATH, Xpath.MINIMIZE_MESSAGES))).click()
         except:
             pass

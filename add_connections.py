@@ -1,9 +1,9 @@
 from utilities import *
 from validation import *
-from browser import Browser
+from linkedinlogin import LinkedInLogin
 
 
-class LinkedInAdd(Browser):
+class LinkedInAdd(LinkedInLogin):
     def __init__(self):
         super().__init__()
         self.mode = ""
@@ -40,8 +40,6 @@ Choice: """)
         return self.keyword, self.num
 
     def network_send_requests(self, num):
-        WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((
-            By.XPATH, Xpath.MINIMIZE_MESSAGES))).click()
         self.driver.get('https://www.linkedin.com/mynetwork/')
         counter = 0
         try:
@@ -71,8 +69,6 @@ Choice: """)
         print("\nProcess done!")
 
     def search_connections_by_keyword(self, keyword):
-        WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((
-            By.XPATH, Xpath.MINIMIZE_MESSAGES))).click()
         search_box = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(
             (By.XPATH, Xpath.SEARCH_BOX)))
         search_box.send_keys(keyword, Keys.ENTER)
@@ -127,5 +123,5 @@ Choice: """)
 
 
 if __name__ == '__main__':
-    linkedin_bot = LinkedInAdd()
-    linkedin_bot.main()
+    AddingBot = LinkedInAdd()
+    AddingBot.main()

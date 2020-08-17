@@ -870,3 +870,4 @@ venv/Lib/site-packages/webdriver_manager-3.2.1.dist-info/REQUESTED
 venv/Lib/site-packages/webdriver_manager-3.2.1.dist-info/top_level.txt
 venv/Lib/site-packages/webdriver_manager-3.2.1.dist-info/WHEEL
 venv/Scripts/chardetect.exe
+__pycache__/linkedinlogin.cpython-38.pyc
