@@ -112,10 +112,11 @@ Choice: """)
                     self.login_linkedin()
                     two_factor_auth()
                     self.network_send_requests(number_of_connections)
-                keyword, number_of_connections = self.get_the_number_of_connections_and_keyword()
-                self.login_linkedin()
-                two_factor_auth()
-                self.send_request_by_keyword(keyword, number_of_connections)
+                else:
+                    keyword, number_of_connections = self.get_the_number_of_connections_and_keyword()
+                    self.login_linkedin()
+                    two_factor_auth()
+                    self.send_request_by_keyword(keyword, number_of_connections)
 
             except:
                 print("\n[-] Quitting...")

@@ -1,6 +1,17 @@
 from utilities import *
+from selenium.webdriver.chrome.options import Options
+
 
 CHROME_PATH = "C:\Program Files\chromedriver.exe"
+
+"""
+Mobile version implementation for future use:
+MOBILE_UA = 'Mozilla/5.0 (Linux; U; Android 4.0.2; en-us; Galaxy Nexus Build/ICL53F)' \
+            #' AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30'
+options = Options()
+options.add_argument(f"user-agent={MOBILE_UA}")
+self.driver = webdriver.Chrome(self.path, chrome_options=options)
+"""
 
 
 class LinkedInLogin:
