@@ -42,5 +42,5 @@ class LinkedInWithdraw(LinkedInLogin):
 
 
 b = LinkedInWithdraw()
-b.withdraw(1)
+b.withdraw(3)
 # TODO: withdraw invitations according to period time

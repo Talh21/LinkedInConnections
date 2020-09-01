@@ -73,7 +73,7 @@ Choice: """)
             (By.XPATH, Xpath.SEARCH_BOX)))
         search_box.send_keys(keyword, Keys.ENTER)
         WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(
-            (By.XPATH, Xpath.VIEW_ONLY_PEOPLE)))
+            (By.XPATH, Xpath.VIEW_ONLY_PEOPLE))).click()
 
     def send_request_by_keyword(self, keyword, num):
         self.search_connections_by_keyword(keyword)

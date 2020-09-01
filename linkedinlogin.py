@@ -35,7 +35,7 @@ class LinkedInLogin:
             time.sleep(1)
             self.driver.find_element_by_id("password").send_keys(password)
             time.sleep(1)
-            self.driver.find_element_by_xpath('//button[@class="btn__primary--large from__button--floating"]').click()
+            self.driver.find_element_by_xpath('//button[@aria-label="Sign in"]').click()
             WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((
                 By.XPATH, Xpath.MINIMIZE_MESSAGES))).click()
         except:
