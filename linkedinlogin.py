@@ -4,15 +4,6 @@ from selenium.webdriver.chrome.options import Options
 
 CHROME_PATH = "C:\Program Files\chromedriver.exe"
 
-"""
-Mobile version implementation for future use:
-MOBILE_UA = 'Mozilla/5.0 (Linux; U; Android 4.0.2; en-us; Galaxy Nexus Build/ICL53F)' \
-            #' AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30'
-options = Options()
-options.add_argument(f"user-agent={MOBILE_UA}")
-self.driver = webdriver.Chrome(self.path, chrome_options=options)
-"""
-
 
 class LinkedInLogin:
     def __init__(self):
@@ -35,7 +26,7 @@ class LinkedInLogin:
             time.sleep(1)
             self.driver.find_element_by_id("password").send_keys(password)
             time.sleep(1)
-            self.driver.find_element_by_xpath('//button[@aria-label="Sign in"]').click()
+            self.driver.find_element_by_xpath(Xpath.SIGN_IN_BUTTON).click()
             WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((
                 By.XPATH, Xpath.MINIMIZE_MESSAGES))).click()
         except:

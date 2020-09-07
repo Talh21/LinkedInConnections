@@ -11,7 +11,7 @@ class LinkedInAdd(LinkedInLogin):
         self.num = ""
 
     def user_prompt_for_choosing_mode(self):
-        self.mode = input("""\nDo you want to use auto-pilot version or search by specific keyword?
+        self.mode = input("""\nDo you want to use auto-pilot version or search by a specific keyword?
 1) Auto-pilot
 2) Search by keyword
 Choice: """)
@@ -45,7 +45,7 @@ Choice: """)
         try:
             for connection in range(counter, int(num)):
                 WebDriverWait(self.driver, 5).until(EC.presence_of_element_located((
-                    By.XPATH, Xpath.CONNECT_NETWORK_UP_PAGE))).click()
+                    By.XPATH, Xpath.CONNECT_NETWORK_TOP_PAGE))).click()
                 counter += 1
                 print(f"\r[+] Sent a connection request => #{counter}", end='', flush=True)
                 time.sleep(2)
