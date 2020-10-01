@@ -1,6 +1,5 @@
-from utilities import *
-from selenium.webdriver.chrome.options import Options
-
+from Utilities.utilities import *
+from Utilities.credentials import *
 
 CHROME_PATH = "C:\Program Files\chromedriver.exe"
 
@@ -21,6 +20,7 @@ class LinkedInLogin:
 
     def login_linkedin(self):
         self.get_linkedin()
+        print("\n[*] Please wait, trying to sign in to LinkedIn...")
         try:
             self.driver.find_element_by_id("username").send_keys(email)
             time.sleep(1)

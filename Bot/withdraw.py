@@ -1,19 +1,27 @@
-from utilities import *
-from linkedinlogin import LinkedInLogin
+from Bot.linkedinlogin import LinkedInLogin
+from Utilities.validation import *
+from Utilities.utilities import *
 
 
 class LinkedInWithdraw(LinkedInLogin):
     def __init__(self):
         super().__init__()
+        self.num = ""
 
     def nav(self):
         self.login_linkedin()
+        two_factor_auth()
         time.sleep(2)
         self.driver.get('https://www.linkedin.com/mynetwork/invitation-manager/sent/')
         time.sleep(1)
 
+    def get_number_of_wanted_withdraws(self):
+        self.num = input("\nPlease enter the number of invites that you wish to withdraw: ")
+        while check_if_isdigit(self.num) is False:
+            self.num = input("\nNot a valid number. Try again: ")
+        return self.num
+
     def withdraw(self, num):
-        self.nav()
         counter = 0
         while counter < int(num):
             try:
@@ -40,7 +48,14 @@ class LinkedInWithdraw(LinkedInLogin):
         self.driver.quit()
         print("\nProcess done!")
 
+    def main(self):
+        if check_internet_connection():
+            try:
+                number_of_withdraws = self.get_number_of_wanted_withdraws()
+                self.nav()
+                self.withdraw(number_of_withdraws)
+            except:
+                print("\n[-] Quitting...")
+                sys.exit()
 
-b = LinkedInWithdraw()
-b.withdraw(3)
 # TODO: withdraw invitations according to period time

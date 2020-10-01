@@ -1,8 +1,6 @@
-from credentials import *
-import validation
-import Xpath
 from urllib.request import *
 from urllib.error import *
+import Xpath
 import os
 import sys
 from selenium import webdriver
@@ -53,8 +51,9 @@ def check_internet_connection():
 
 
 def two_factor_auth():
+    print("[+] Successfully signed in!")
     try:
-        two_factor = input("\nIf you you have 2FA please enter the verification code."
+        two_factor = input("\n[*] If you you have 2FA please enter the verification code."
                    "\nWhen you are in LinkedIn Homepage press Enter to continue: ")
         while two_factor != "":
             two_factor = input("Please press Enter")

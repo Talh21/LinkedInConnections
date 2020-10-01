@@ -1,6 +1,6 @@
-from utilities import *
-from validation import *
-from linkedinlogin import LinkedInLogin
+from Bot.linkedinlogin import LinkedInLogin
+from Utilities.validation import *
+from Utilities.utilities import *
 
 
 class LinkedInAdd(LinkedInLogin):
@@ -47,7 +47,7 @@ Choice: """)
                 WebDriverWait(self.driver, 5).until(EC.presence_of_element_located((
                     By.XPATH, Xpath.CONNECT_NETWORK_TOP_PAGE))).click()
                 counter += 1
-                print(f"\r[+] Sent a connection request => #{counter}", end='', flush=True)
+                print(f"\r[+]Sent a connection request => #{counter}", end='', flush=True)
                 time.sleep(2)
         except:
             pass
@@ -103,7 +103,6 @@ Choice: """)
         print("\nProcess done!")
 
     def main(self):
-        intro()
         if check_internet_connection():
             try:
                 mode = self.user_prompt_for_choosing_mode()
@@ -121,8 +120,3 @@ Choice: """)
             except:
                 print("\n[-] Quitting...")
                 sys.exit()
-
-
-if __name__ == '__main__':
-    AddingBot = LinkedInAdd()
-    AddingBot.main()
