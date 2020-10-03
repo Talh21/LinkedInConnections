@@ -20,4 +20,3 @@ Choice: """)
     else:
         Bot = LinkedInWithdraw()
         Bot.main()
-

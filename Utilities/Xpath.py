@@ -8,6 +8,6 @@ VIEW_ONLY_PEOPLE = '//button[@aria-label="People"]'
 CONNECT_BUTTON_SEARCH_PAGE = "//button/span[text()='Connect']/.."
 CONFIRM_CONNECTION = '//button[@aria-label="Send now"]'
 NEXT_PAGE = '//button[@aria-label="Next"]'
+PREVIOUS_PAGE = '//button[@aria-label="Previous"]'
 WITHDRAW_INVITATION = '//button[@data-control-name="withdraw_single"]'
 CONFIRM_WITHDRAWAL = "//button/span[text()='Withdraw']/.."
-

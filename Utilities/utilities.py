@@ -9,8 +9,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
-
-
+from selenium.common.exceptions import TimeoutException
 def intro():
     os.system("cls")
     print("""
@@ -53,8 +52,8 @@ def check_internet_connection():
 def two_factor_auth():
     print("[+] Successfully signed in!")
     try:
-        two_factor = input("\n[*] If you you have 2FA please enter the verification code."
-                   "\nWhen you are in LinkedIn Homepage press Enter to continue: ")
+        two_factor = input("\n[*] If you have 2FA please enter the verification code."
+                           "\nWhen you are in LinkedIn Homepage press Enter to continue: ")
         while two_factor != "":
             two_factor = input("Please press Enter")
     except:

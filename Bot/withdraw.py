@@ -21,26 +21,36 @@ class LinkedInWithdraw(LinkedInLogin):
             self.num = input("\nNot a valid number. Try again: ")
         return self.num
 
-    def withdraw(self, num):  # Should go TO the last page/end of the page first
+    def go_to_last_page(self):
+        while True:
+            try:
+                WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.XPATH, Xpath.NEXT_PAGE))).click()
+            except TimeoutException:
+                print("\nLast page")
+                break
+
+    def withdraw(self, num):
         counter = 0
         while counter < int(num):
+            all_withdraws_btn = WebDriverWait(self.driver, 7).until(EC.presence_of_all_elements_located(
+                (By.XPATH, Xpath.WITHDRAW_INVITATION)))
             try:
                 for button in range(counter, int(num)):
-                    WebDriverWait(self.driver, 2).until(EC.presence_of_element_located(
-                        (By.XPATH, Xpath.WITHDRAW_INVITATION))).click()
-                    WebDriverWait(self.driver, 2).until(EC.presence_of_element_located(
-                        (By.XPATH,Xpath.CONFIRM_WITHDRAWAL))).click()
+                    withdraw = all_withdraws_btn[-1]
+                    withdraw.click()
+                    WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(
+                        (By.XPATH, Xpath.CONFIRM_WITHDRAWAL))).click()
+                    time.sleep(3)  # Load the next withdraw
                     counter += 1
                     print(f"\r[+] Successfully withdraw invitation => #{counter}", end='', flush=True)
-                    time.sleep(1)
+
             except:
                 pass
 
-            self.driver.execute_script('window.scrollTo(0,(window.pageYOffset+300))')
-            time.sleep(3)
             try:
-                self.driver.find_element_by_xpath(Xpath.NEXT_PAGE).click()
-                time.sleep(1)
+                self.driver.find_element_by_xpath(Xpath.PREVIOUS_PAGE).click()
+                time.sleep(2)
+
             except:
                 pass
 
@@ -52,10 +62,9 @@ class LinkedInWithdraw(LinkedInLogin):
             try:
                 number_of_withdraws = self.get_number_of_wanted_withdraws()
                 self.nav()
+                self.go_to_last_page()
                 self.withdraw(number_of_withdraws)
+
             except:
                 print("\n[-] Quitting...")
                 sys.exit()
-
-
-# TODO: withdraw invitations according to period time
