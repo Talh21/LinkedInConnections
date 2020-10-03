@@ -1,7 +1,5 @@
 from Utilities.utilities import *
-from Utilities.credentials import *
-
-CHROME_PATH = "C:\Program Files\chromedriver.exe"
+from settings import *
 
 
 class LinkedInLogin:

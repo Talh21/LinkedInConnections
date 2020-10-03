@@ -74,6 +74,8 @@ Choice: """)
         search_box.send_keys(keyword, Keys.ENTER)
         WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(
             (By.XPATH, Xpath.VIEW_ONLY_PEOPLE))).click()
+        time.sleep(2)
+        self.driver.get(self.driver.current_url)  # Made this for "Next" and "Connect" button will appear
 
     def send_request_by_keyword(self, keyword, num):
         self.search_connections_by_keyword(keyword)
@@ -81,10 +83,11 @@ Choice: """)
         while counter < int(num):
             try:
                 for button in range(counter, int(num)):
-                    WebDriverWait(self.driver, 2).until(EC.presence_of_element_located(
+                    WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(
                         (By.XPATH, Xpath.CONNECT_BUTTON_SEARCH_PAGE))).click()
-                    WebDriverWait(self.driver, 2).until(EC.presence_of_element_located(
+                    WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(
                         (By.XPATH, Xpath.CONFIRM_CONNECTION))).click()
+                    time.sleep(1)
                     counter += 1
                     print(f"\r[+] Sent a connection request => #{counter}", end='', flush=True)
                     time.sleep(1)

@@ -21,16 +21,15 @@ class LinkedInWithdraw(LinkedInLogin):
             self.num = input("\nNot a valid number. Try again: ")
         return self.num
 
-    def withdraw(self, num):
+    def withdraw(self, num):  # Should go TO the last page/end of the page first
         counter = 0
         while counter < int(num):
             try:
                 for button in range(counter, int(num)):
                     WebDriverWait(self.driver, 2).until(EC.presence_of_element_located(
-                        (By.XPATH, '//button[@data-control-name="withdraw_single"]'))).click()
+                        (By.XPATH, Xpath.WITHDRAW_INVITATION))).click()
                     WebDriverWait(self.driver, 2).until(EC.presence_of_element_located(
-                        (By.XPATH, '//button[@class="artdeco-modal__confirm-dialog-btn artdeco-button'
-                                   ' artdeco-button--2 artdeco-button--primary ember-view"]'))).click()
+                        (By.XPATH,Xpath.CONFIRM_WITHDRAWAL))).click()
                     counter += 1
                     print(f"\r[+] Successfully withdraw invitation => #{counter}", end='', flush=True)
                     time.sleep(1)
@@ -57,5 +56,6 @@ class LinkedInWithdraw(LinkedInLogin):
             except:
                 print("\n[-] Quitting...")
                 sys.exit()
+
 
 # TODO: withdraw invitations according to period time
