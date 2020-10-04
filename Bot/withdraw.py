@@ -47,12 +47,13 @@ class LinkedInWithdraw(LinkedInLogin):
             except:
                 pass
 
-            try:
-                self.driver.find_element_by_xpath(Xpath.PREVIOUS_PAGE).click()
-                time.sleep(2)
+            if counter < int(num) and len(all_withdraws_btn) == 0:
+                try:
+                    self.driver.find_element_by_xpath(Xpath.PREVIOUS_PAGE).click()
+                    time.sleep(2)
 
-            except:
-                pass
+                except:
+                    pass
 
         self.driver.quit()
         print("\nProcess done!")

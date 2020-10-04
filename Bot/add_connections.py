@@ -87,20 +87,20 @@ Choice: """)
                         (By.XPATH, Xpath.CONNECT_BUTTON_SEARCH_PAGE))).click()
                     WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(
                         (By.XPATH, Xpath.CONFIRM_CONNECTION))).click()
-                    time.sleep(1)
+                    time.sleep(2)
                     counter += 1
                     print(f"\r[+] Sent a connection request => #{counter}", end='', flush=True)
-                    time.sleep(1)
             except:
                 pass
 
-            self.driver.execute_script('window.scrollTo(0,(window.pageYOffset+300))')
-            time.sleep(4)
-            try:
-                self.driver.find_element_by_xpath(Xpath.NEXT_PAGE).click()
-                time.sleep(1)
-            except:
-                pass
+            if counter < int(num):
+                self.driver.execute_script('window.scrollTo(0,(window.pageYOffset+300))')
+                time.sleep(4)
+                try:
+                    self.driver.find_element_by_xpath(Xpath.NEXT_PAGE).click()
+                    time.sleep(1)
+                except:
+                    pass
 
         self.driver.quit()
         print("\nProcess done!")

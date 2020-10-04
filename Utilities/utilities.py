@@ -38,7 +38,7 @@ def check_internet_connection():
     try:
         urlopen('http://216.58.192.142', timeout=10)
         try:
-            urlopen("https://www.linkedin.com/home", timeout=2)
+            urlopen("https://www.linkedin.com/home", timeout=10)
             print("Everything is set to go!")
             return True
         except URLError:
