@@ -10,7 +10,7 @@ and more connections means more people Will be exposed to your posts, and you wi
 
 2. **Search by keyword :mag_right:** - add connections based on keywords given by the user.
 
-3. **Withdraw invitations**  
+3. **Withdraw invitations :x:** - withdraw invitations from old to new order 
 
 ## Instructions & Requirements
 
