@@ -6,7 +6,7 @@ Making connections is a core fundamental of LinkedIn(500+ is recommended). With 
 and more connections means more people Will be exposed to your posts, and you will be more often comes up in the search results.
 
 ## Features
-1. **Auto pilot :airplane:** - add as much connections as you want(according to Linkedin policy) through the "network page" - it will add connections based on the LinkedIn      suggestions algoritm.
+1. **Auto pilot :airplane:** - add as much connections as you want(according to Linkedin policy) through the "network page" - it will add connections based on the LinkedIn      suggestions algorithm.
 
 2. **Search by keyword :mag_right:** - add connections based on keywords given by the user.
 
